@@ -3,8 +3,8 @@
 
 package com.proto.cart;
 
-public interface AddProductsRequestOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:AddProductsRequest)
+public interface CreateProductResponseOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:CreateProductResponse)
     com.google.protobuf.MessageOrBuilder {
 
   /**
@@ -21,16 +21,4 @@ public interface AddProductsRequestOrBuilder extends
    * <code>.Product product = 1;</code>
    */
   com.proto.cart.ProductOrBuilder getProductOrBuilder();
-
-  /**
-   * <code>string cartId = 2;</code>
-   * @return The cartId.
-   */
-  java.lang.String getCartId();
-  /**
-   * <code>string cartId = 2;</code>
-   * @return The bytes for cartId.
-   */
-  com.google.protobuf.ByteString
-      getCartIdBytes();
 }

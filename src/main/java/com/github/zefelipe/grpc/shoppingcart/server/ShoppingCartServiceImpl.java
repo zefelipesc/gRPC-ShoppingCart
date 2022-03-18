@@ -1,31 +1,38 @@
 package com.github.zefelipe.grpc.shoppingcart.server;
 
+import static com.mongodb.client.model.Filters.eq;
+
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.proto.cart.AddProductResponse;
-import com.proto.cart.AddProductsRequest;
+import com.proto.cart.CreateProductRequest;
+import com.proto.cart.CreateProductResponse;
 import com.proto.cart.Product;
+import com.proto.cart.ReadProductRequest;
+import com.proto.cart.ReadProductResponse;
 import com.proto.cart.ShoppingCartServiceGrpc;
 
+import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 
 public class ShoppingCartServiceImpl extends ShoppingCartServiceGrpc.ShoppingCartServiceImplBase {
 
     // Create a mongo client to use to connect with my database
-    private MongoClient mongoClient = MongoClients.create("mongodb://localhost:27017");
-    // Get/Create a database if it doesn't exist
-    private MongoDatabase database = mongoClient.getDatabase("shoppingCartDb");
-    // Get/Create the table(are collections in mongoDB) called product, inside my database
+    final private MongoClient mongoClient = MongoClients.create("mongodb://localhost:27017");
 
-    private MongoCollection<Document> collection = database.getCollection("product");
+    // Get/Create a database if it doesn't exist
+    final private MongoDatabase database = mongoClient.getDatabase("shoppingCartDb");
+
+    // Get/Create the table(are collections in mongoDB) called product, inside my database
+    final private MongoCollection<Document> collection = database.getCollection("product");
 
     @Override
-    public void addProduct(AddProductsRequest request, StreamObserver<AddProductResponse> responseObserver) {
-        System.out.println("Receive Add Product Request");
+    public void createProduct(CreateProductRequest request, StreamObserver<CreateProductResponse> responseObserver) {
+        System.out.println("Receive Create Product Request");
 
         Product prod = request.getProduct();
         Document doc = new Document("productId", prod.getProductId())
@@ -48,13 +55,43 @@ public class ShoppingCartServiceImpl extends ShoppingCartServiceGrpc.ShoppingCar
                 .setPrice(prod.getPrice())
                 .build();
 
-        AddProductResponse response = AddProductResponse.newBuilder()
-                .addProducts(product)
+        CreateProductResponse response = CreateProductResponse.newBuilder()
+                .setProduct(product)
                 .build();
 
         // Send the response
         responseObserver.onNext(response);
         responseObserver.onCompleted();
 
+    }
+
+    @Override
+    public void readProduct(ReadProductRequest request, StreamObserver<ReadProductResponse> responseObserver) {
+        System.out.println("Receive Read Product Request");
+        String productId = request.getProductId();
+
+        // I need to do a wrapper into a new ObjectId, because in mongoDB de _id field is already wrapped into a objectId(it is not a string)
+        // I find in the collection all the matching elements that have the id equals to the productId from request
+       System.out.println("Searching product...");
+       Document result = collection.find(eq("_id", new ObjectId(productId))).first();
+       if (result == null) {
+           responseObserver.onError(Status.NOT_FOUND.withDescription("The product with the searched id wasn't found").asRuntimeException());
+           System.out.println("Product not found!");
+       } else {
+           Product product = Product.newBuilder()
+                   .setProductId(result.getString("productId"))
+                   .setName(result.getString("name"))
+                   .setStock(result.getInteger("stock"))
+                   .setPrice(result.getDouble("price"))
+                   .build();
+
+           ReadProductResponse response = ReadProductResponse.newBuilder()
+                   .setProduct(product)
+                   .build();
+
+           responseObserver.onNext(response);
+           responseObserver.onCompleted();
+           System.out.println("Product found!");
+       }
     }
 }

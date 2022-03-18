@@ -4,26 +4,25 @@
 package com.proto.cart;
 
 /**
- * Protobuf type {@code AddProductsRequest}
+ * Protobuf type {@code ReadProductResponse}
  */
-public final class AddProductsRequest extends
+public final class ReadProductResponse extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:AddProductsRequest)
-    AddProductsRequestOrBuilder {
+    // @@protoc_insertion_point(message_implements:ReadProductResponse)
+    ReadProductResponseOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use AddProductsRequest.newBuilder() to construct.
-  private AddProductsRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use ReadProductResponse.newBuilder() to construct.
+  private ReadProductResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private AddProductsRequest() {
-    cartId_ = "";
+  private ReadProductResponse() {
   }
 
   @java.lang.Override
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new AddProductsRequest();
+    return new ReadProductResponse();
   }
 
   @java.lang.Override
@@ -31,7 +30,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private AddProductsRequest(
+  private ReadProductResponse(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -62,12 +61,6 @@ private static final long serialVersionUID = 0L;
 
             break;
           }
-          case 18: {
-            java.lang.String s = input.readStringRequireUtf8();
-
-            cartId_ = s;
-            break;
-          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -89,15 +82,15 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.proto.cart.ShoppingCartServiceOuterClass.internal_static_AddProductsRequest_descriptor;
+    return com.proto.cart.ShoppingCartServiceOuterClass.internal_static_ReadProductResponse_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.proto.cart.ShoppingCartServiceOuterClass.internal_static_AddProductsRequest_fieldAccessorTable
+    return com.proto.cart.ShoppingCartServiceOuterClass.internal_static_ReadProductResponse_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.proto.cart.AddProductsRequest.class, com.proto.cart.AddProductsRequest.Builder.class);
+            com.proto.cart.ReadProductResponse.class, com.proto.cart.ReadProductResponse.Builder.class);
   }
 
   public static final int PRODUCT_FIELD_NUMBER = 1;
@@ -126,44 +119,6 @@ private static final long serialVersionUID = 0L;
     return getProduct();
   }
 
-  public static final int CARTID_FIELD_NUMBER = 2;
-  private volatile java.lang.Object cartId_;
-  /**
-   * <code>string cartId = 2;</code>
-   * @return The cartId.
-   */
-  @java.lang.Override
-  public java.lang.String getCartId() {
-    java.lang.Object ref = cartId_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      cartId_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string cartId = 2;</code>
-   * @return The bytes for cartId.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getCartIdBytes() {
-    java.lang.Object ref = cartId_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      cartId_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -181,9 +136,6 @@ private static final long serialVersionUID = 0L;
     if (product_ != null) {
       output.writeMessage(1, getProduct());
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(cartId_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, cartId_);
-    }
     unknownFields.writeTo(output);
   }
 
@@ -197,9 +149,6 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(1, getProduct());
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(cartId_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, cartId_);
-    }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
     return size;
@@ -210,18 +159,16 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.proto.cart.AddProductsRequest)) {
+    if (!(obj instanceof com.proto.cart.ReadProductResponse)) {
       return super.equals(obj);
     }
-    com.proto.cart.AddProductsRequest other = (com.proto.cart.AddProductsRequest) obj;
+    com.proto.cart.ReadProductResponse other = (com.proto.cart.ReadProductResponse) obj;
 
     if (hasProduct() != other.hasProduct()) return false;
     if (hasProduct()) {
       if (!getProduct()
           .equals(other.getProduct())) return false;
     }
-    if (!getCartId()
-        .equals(other.getCartId())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -237,76 +184,74 @@ private static final long serialVersionUID = 0L;
       hash = (37 * hash) + PRODUCT_FIELD_NUMBER;
       hash = (53 * hash) + getProduct().hashCode();
     }
-    hash = (37 * hash) + CARTID_FIELD_NUMBER;
-    hash = (53 * hash) + getCartId().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static com.proto.cart.AddProductsRequest parseFrom(
+  public static com.proto.cart.ReadProductResponse parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.proto.cart.AddProductsRequest parseFrom(
+  public static com.proto.cart.ReadProductResponse parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.proto.cart.AddProductsRequest parseFrom(
+  public static com.proto.cart.ReadProductResponse parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.proto.cart.AddProductsRequest parseFrom(
+  public static com.proto.cart.ReadProductResponse parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.proto.cart.AddProductsRequest parseFrom(byte[] data)
+  public static com.proto.cart.ReadProductResponse parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.proto.cart.AddProductsRequest parseFrom(
+  public static com.proto.cart.ReadProductResponse parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.proto.cart.AddProductsRequest parseFrom(java.io.InputStream input)
+  public static com.proto.cart.ReadProductResponse parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.proto.cart.AddProductsRequest parseFrom(
+  public static com.proto.cart.ReadProductResponse parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.proto.cart.AddProductsRequest parseDelimitedFrom(java.io.InputStream input)
+  public static com.proto.cart.ReadProductResponse parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static com.proto.cart.AddProductsRequest parseDelimitedFrom(
+  public static com.proto.cart.ReadProductResponse parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.proto.cart.AddProductsRequest parseFrom(
+  public static com.proto.cart.ReadProductResponse parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.proto.cart.AddProductsRequest parseFrom(
+  public static com.proto.cart.ReadProductResponse parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -319,7 +264,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.proto.cart.AddProductsRequest prototype) {
+  public static Builder newBuilder(com.proto.cart.ReadProductResponse prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -335,26 +280,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code AddProductsRequest}
+   * Protobuf type {@code ReadProductResponse}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:AddProductsRequest)
-      com.proto.cart.AddProductsRequestOrBuilder {
+      // @@protoc_insertion_point(builder_implements:ReadProductResponse)
+      com.proto.cart.ReadProductResponseOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.proto.cart.ShoppingCartServiceOuterClass.internal_static_AddProductsRequest_descriptor;
+      return com.proto.cart.ShoppingCartServiceOuterClass.internal_static_ReadProductResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.proto.cart.ShoppingCartServiceOuterClass.internal_static_AddProductsRequest_fieldAccessorTable
+      return com.proto.cart.ShoppingCartServiceOuterClass.internal_static_ReadProductResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.proto.cart.AddProductsRequest.class, com.proto.cart.AddProductsRequest.Builder.class);
+              com.proto.cart.ReadProductResponse.class, com.proto.cart.ReadProductResponse.Builder.class);
     }
 
-    // Construct using com.proto.cart.AddProductsRequest.newBuilder()
+    // Construct using com.proto.cart.ReadProductResponse.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -378,25 +323,23 @@ private static final long serialVersionUID = 0L;
         product_ = null;
         productBuilder_ = null;
       }
-      cartId_ = "";
-
       return this;
     }
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.proto.cart.ShoppingCartServiceOuterClass.internal_static_AddProductsRequest_descriptor;
+      return com.proto.cart.ShoppingCartServiceOuterClass.internal_static_ReadProductResponse_descriptor;
     }
 
     @java.lang.Override
-    public com.proto.cart.AddProductsRequest getDefaultInstanceForType() {
-      return com.proto.cart.AddProductsRequest.getDefaultInstance();
+    public com.proto.cart.ReadProductResponse getDefaultInstanceForType() {
+      return com.proto.cart.ReadProductResponse.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.proto.cart.AddProductsRequest build() {
-      com.proto.cart.AddProductsRequest result = buildPartial();
+    public com.proto.cart.ReadProductResponse build() {
+      com.proto.cart.ReadProductResponse result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -404,14 +347,13 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public com.proto.cart.AddProductsRequest buildPartial() {
-      com.proto.cart.AddProductsRequest result = new com.proto.cart.AddProductsRequest(this);
+    public com.proto.cart.ReadProductResponse buildPartial() {
+      com.proto.cart.ReadProductResponse result = new com.proto.cart.ReadProductResponse(this);
       if (productBuilder_ == null) {
         result.product_ = product_;
       } else {
         result.product_ = productBuilder_.build();
       }
-      result.cartId_ = cartId_;
       onBuilt();
       return result;
     }
@@ -450,22 +392,18 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.proto.cart.AddProductsRequest) {
-        return mergeFrom((com.proto.cart.AddProductsRequest)other);
+      if (other instanceof com.proto.cart.ReadProductResponse) {
+        return mergeFrom((com.proto.cart.ReadProductResponse)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.proto.cart.AddProductsRequest other) {
-      if (other == com.proto.cart.AddProductsRequest.getDefaultInstance()) return this;
+    public Builder mergeFrom(com.proto.cart.ReadProductResponse other) {
+      if (other == com.proto.cart.ReadProductResponse.getDefaultInstance()) return this;
       if (other.hasProduct()) {
         mergeProduct(other.getProduct());
-      }
-      if (!other.getCartId().isEmpty()) {
-        cartId_ = other.cartId_;
-        onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -482,11 +420,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      com.proto.cart.AddProductsRequest parsedMessage = null;
+      com.proto.cart.ReadProductResponse parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (com.proto.cart.AddProductsRequest) e.getUnfinishedMessage();
+        parsedMessage = (com.proto.cart.ReadProductResponse) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -614,82 +552,6 @@ private static final long serialVersionUID = 0L;
       }
       return productBuilder_;
     }
-
-    private java.lang.Object cartId_ = "";
-    /**
-     * <code>string cartId = 2;</code>
-     * @return The cartId.
-     */
-    public java.lang.String getCartId() {
-      java.lang.Object ref = cartId_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        cartId_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string cartId = 2;</code>
-     * @return The bytes for cartId.
-     */
-    public com.google.protobuf.ByteString
-        getCartIdBytes() {
-      java.lang.Object ref = cartId_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        cartId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string cartId = 2;</code>
-     * @param value The cartId to set.
-     * @return This builder for chaining.
-     */
-    public Builder setCartId(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      cartId_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string cartId = 2;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearCartId() {
-      
-      cartId_ = getDefaultInstance().getCartId();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string cartId = 2;</code>
-     * @param value The bytes for cartId to set.
-     * @return This builder for chaining.
-     */
-    public Builder setCartIdBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      cartId_ = value;
-      onChanged();
-      return this;
-    }
     @java.lang.Override
     public final Builder setUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -703,41 +565,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:AddProductsRequest)
+    // @@protoc_insertion_point(builder_scope:ReadProductResponse)
   }
 
-  // @@protoc_insertion_point(class_scope:AddProductsRequest)
-  private static final com.proto.cart.AddProductsRequest DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:ReadProductResponse)
+  private static final com.proto.cart.ReadProductResponse DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.proto.cart.AddProductsRequest();
+    DEFAULT_INSTANCE = new com.proto.cart.ReadProductResponse();
   }
 
-  public static com.proto.cart.AddProductsRequest getDefaultInstance() {
+  public static com.proto.cart.ReadProductResponse getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<AddProductsRequest>
-      PARSER = new com.google.protobuf.AbstractParser<AddProductsRequest>() {
+  private static final com.google.protobuf.Parser<ReadProductResponse>
+      PARSER = new com.google.protobuf.AbstractParser<ReadProductResponse>() {
     @java.lang.Override
-    public AddProductsRequest parsePartialFrom(
+    public ReadProductResponse parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new AddProductsRequest(input, extensionRegistry);
+      return new ReadProductResponse(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<AddProductsRequest> parser() {
+  public static com.google.protobuf.Parser<ReadProductResponse> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<AddProductsRequest> getParserForType() {
+  public com.google.protobuf.Parser<ReadProductResponse> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.proto.cart.AddProductsRequest getDefaultInstanceForType() {
+  public com.proto.cart.ReadProductResponse getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

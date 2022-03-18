@@ -15,35 +15,66 @@ public final class ShoppingCartServiceGrpc {
   public static final String SERVICE_NAME = "ShoppingCartService";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<com.proto.cart.AddProductsRequest,
-      com.proto.cart.AddProductResponse> getAddProductMethod;
+  private static volatile io.grpc.MethodDescriptor<com.proto.cart.CreateProductRequest,
+      com.proto.cart.CreateProductResponse> getCreateProductMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "AddProduct",
-      requestType = com.proto.cart.AddProductsRequest.class,
-      responseType = com.proto.cart.AddProductResponse.class,
+      fullMethodName = SERVICE_NAME + '/' + "CreateProduct",
+      requestType = com.proto.cart.CreateProductRequest.class,
+      responseType = com.proto.cart.CreateProductResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.proto.cart.AddProductsRequest,
-      com.proto.cart.AddProductResponse> getAddProductMethod() {
-    io.grpc.MethodDescriptor<com.proto.cart.AddProductsRequest, com.proto.cart.AddProductResponse> getAddProductMethod;
-    if ((getAddProductMethod = ShoppingCartServiceGrpc.getAddProductMethod) == null) {
+  public static io.grpc.MethodDescriptor<com.proto.cart.CreateProductRequest,
+      com.proto.cart.CreateProductResponse> getCreateProductMethod() {
+    io.grpc.MethodDescriptor<com.proto.cart.CreateProductRequest, com.proto.cart.CreateProductResponse> getCreateProductMethod;
+    if ((getCreateProductMethod = ShoppingCartServiceGrpc.getCreateProductMethod) == null) {
       synchronized (ShoppingCartServiceGrpc.class) {
-        if ((getAddProductMethod = ShoppingCartServiceGrpc.getAddProductMethod) == null) {
-          ShoppingCartServiceGrpc.getAddProductMethod = getAddProductMethod =
-              io.grpc.MethodDescriptor.<com.proto.cart.AddProductsRequest, com.proto.cart.AddProductResponse>newBuilder()
+        if ((getCreateProductMethod = ShoppingCartServiceGrpc.getCreateProductMethod) == null) {
+          ShoppingCartServiceGrpc.getCreateProductMethod = getCreateProductMethod =
+              io.grpc.MethodDescriptor.<com.proto.cart.CreateProductRequest, com.proto.cart.CreateProductResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "AddProduct"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "CreateProduct"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.proto.cart.AddProductsRequest.getDefaultInstance()))
+                  com.proto.cart.CreateProductRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.proto.cart.AddProductResponse.getDefaultInstance()))
-              .setSchemaDescriptor(new ShoppingCartServiceMethodDescriptorSupplier("AddProduct"))
+                  com.proto.cart.CreateProductResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new ShoppingCartServiceMethodDescriptorSupplier("CreateProduct"))
               .build();
         }
       }
     }
-    return getAddProductMethod;
+    return getCreateProductMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.proto.cart.ReadProductRequest,
+      com.proto.cart.ReadProductResponse> getReadProductMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "ReadProduct",
+      requestType = com.proto.cart.ReadProductRequest.class,
+      responseType = com.proto.cart.ReadProductResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.proto.cart.ReadProductRequest,
+      com.proto.cart.ReadProductResponse> getReadProductMethod() {
+    io.grpc.MethodDescriptor<com.proto.cart.ReadProductRequest, com.proto.cart.ReadProductResponse> getReadProductMethod;
+    if ((getReadProductMethod = ShoppingCartServiceGrpc.getReadProductMethod) == null) {
+      synchronized (ShoppingCartServiceGrpc.class) {
+        if ((getReadProductMethod = ShoppingCartServiceGrpc.getReadProductMethod) == null) {
+          ShoppingCartServiceGrpc.getReadProductMethod = getReadProductMethod =
+              io.grpc.MethodDescriptor.<com.proto.cart.ReadProductRequest, com.proto.cart.ReadProductResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "ReadProduct"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.proto.cart.ReadProductRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.proto.cart.ReadProductResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new ShoppingCartServiceMethodDescriptorSupplier("ReadProduct"))
+              .build();
+        }
+      }
+    }
+    return getReadProductMethod;
   }
 
   /**
@@ -96,20 +127,34 @@ public final class ShoppingCartServiceGrpc {
 
     /**
      */
-    public void addProduct(com.proto.cart.AddProductsRequest request,
-        io.grpc.stub.StreamObserver<com.proto.cart.AddProductResponse> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getAddProductMethod(), responseObserver);
+    public void createProduct(com.proto.cart.CreateProductRequest request,
+        io.grpc.stub.StreamObserver<com.proto.cart.CreateProductResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getCreateProductMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void readProduct(com.proto.cart.ReadProductRequest request,
+        io.grpc.stub.StreamObserver<com.proto.cart.ReadProductResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getReadProductMethod(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
-            getAddProductMethod(),
+            getCreateProductMethod(),
             io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
-                com.proto.cart.AddProductsRequest,
-                com.proto.cart.AddProductResponse>(
-                  this, METHODID_ADD_PRODUCT)))
+                com.proto.cart.CreateProductRequest,
+                com.proto.cart.CreateProductResponse>(
+                  this, METHODID_CREATE_PRODUCT)))
+          .addMethod(
+            getReadProductMethod(),
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
+              new MethodHandlers<
+                com.proto.cart.ReadProductRequest,
+                com.proto.cart.ReadProductResponse>(
+                  this, METHODID_READ_PRODUCT)))
           .build();
     }
   }
@@ -130,10 +175,18 @@ public final class ShoppingCartServiceGrpc {
 
     /**
      */
-    public void addProduct(com.proto.cart.AddProductsRequest request,
-        io.grpc.stub.StreamObserver<com.proto.cart.AddProductResponse> responseObserver) {
+    public void createProduct(com.proto.cart.CreateProductRequest request,
+        io.grpc.stub.StreamObserver<com.proto.cart.CreateProductResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getAddProductMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getCreateProductMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void readProduct(com.proto.cart.ReadProductRequest request,
+        io.grpc.stub.StreamObserver<com.proto.cart.ReadProductResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getReadProductMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -153,9 +206,16 @@ public final class ShoppingCartServiceGrpc {
 
     /**
      */
-    public com.proto.cart.AddProductResponse addProduct(com.proto.cart.AddProductsRequest request) {
+    public com.proto.cart.CreateProductResponse createProduct(com.proto.cart.CreateProductRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getAddProductMethod(), getCallOptions(), request);
+          getChannel(), getCreateProductMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.proto.cart.ReadProductResponse readProduct(com.proto.cart.ReadProductRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getReadProductMethod(), getCallOptions(), request);
     }
   }
 
@@ -175,14 +235,23 @@ public final class ShoppingCartServiceGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.proto.cart.AddProductResponse> addProduct(
-        com.proto.cart.AddProductsRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<com.proto.cart.CreateProductResponse> createProduct(
+        com.proto.cart.CreateProductRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getAddProductMethod(), getCallOptions()), request);
+          getChannel().newCall(getCreateProductMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.proto.cart.ReadProductResponse> readProduct(
+        com.proto.cart.ReadProductRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getReadProductMethod(), getCallOptions()), request);
     }
   }
 
-  private static final int METHODID_ADD_PRODUCT = 0;
+  private static final int METHODID_CREATE_PRODUCT = 0;
+  private static final int METHODID_READ_PRODUCT = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -201,9 +270,13 @@ public final class ShoppingCartServiceGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_ADD_PRODUCT:
-          serviceImpl.addProduct((com.proto.cart.AddProductsRequest) request,
-              (io.grpc.stub.StreamObserver<com.proto.cart.AddProductResponse>) responseObserver);
+        case METHODID_CREATE_PRODUCT:
+          serviceImpl.createProduct((com.proto.cart.CreateProductRequest) request,
+              (io.grpc.stub.StreamObserver<com.proto.cart.CreateProductResponse>) responseObserver);
+          break;
+        case METHODID_READ_PRODUCT:
+          serviceImpl.readProduct((com.proto.cart.ReadProductRequest) request,
+              (io.grpc.stub.StreamObserver<com.proto.cart.ReadProductResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -266,7 +339,8 @@ public final class ShoppingCartServiceGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new ShoppingCartServiceFileDescriptorSupplier())
-              .addMethod(getAddProductMethod())
+              .addMethod(getCreateProductMethod())
+              .addMethod(getReadProductMethod())
               .build();
         }
       }

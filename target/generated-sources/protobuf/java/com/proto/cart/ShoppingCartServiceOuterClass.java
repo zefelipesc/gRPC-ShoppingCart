@@ -20,15 +20,25 @@ public final class ShoppingCartServiceOuterClass {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Product_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_AddProductsRequest_descriptor;
+    internal_static_CreateProductRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_AddProductsRequest_fieldAccessorTable;
+      internal_static_CreateProductRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_AddProductResponse_descriptor;
+    internal_static_CreateProductResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_AddProductResponse_fieldAccessorTable;
+      internal_static_CreateProductResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ReadProductRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ReadProductRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ReadProductResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ReadProductResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -40,13 +50,17 @@ public final class ShoppingCartServiceOuterClass {
     java.lang.String[] descriptorData = {
       "\n\036cart/ShoppingCartService.proto\"H\n\007Prod" +
       "uct\022\021\n\tproductId\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\r\n\005" +
-      "stock\030\003 \001(\005\022\r\n\005price\030\004 \001(\001\"?\n\022AddProduct" +
-      "sRequest\022\031\n\007product\030\001 \001(\0132\010.Product\022\016\n\006c" +
-      "artId\030\002 \001(\t\"0\n\022AddProductResponse\022\032\n\010pro" +
-      "ducts\030\001 \003(\0132\010.Product2M\n\023ShoppingCartSer" +
-      "vice\0226\n\nAddProduct\022\023.AddProductsRequest\032" +
-      "\023.AddProductResponseB\022\n\016com.proto.cartP\001" +
-      "b\006proto3"
+      "stock\030\003 \001(\005\022\r\n\005price\030\004 \001(\001\"A\n\024CreateProd" +
+      "uctRequest\022\031\n\007product\030\001 \001(\0132\010.Product\022\016\n" +
+      "\006cartId\030\002 \001(\t\"2\n\025CreateProductResponse\022\031" +
+      "\n\007product\030\001 \001(\0132\010.Product\"\'\n\022ReadProduct" +
+      "Request\022\021\n\tproductId\030\001 \001(\t\"0\n\023ReadProduc" +
+      "tResponse\022\031\n\007product\030\001 \001(\0132\010.Product2\217\001\n" +
+      "\023ShoppingCartService\022>\n\rCreateProduct\022\025." +
+      "CreateProductRequest\032\026.CreateProductResp" +
+      "onse\0228\n\013ReadProduct\022\023.ReadProductRequest" +
+      "\032\024.ReadProductResponseB\022\n\016com.proto.cart" +
+      "P\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -58,18 +72,30 @@ public final class ShoppingCartServiceOuterClass {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Product_descriptor,
         new java.lang.String[] { "ProductId", "Name", "Stock", "Price", });
-    internal_static_AddProductsRequest_descriptor =
+    internal_static_CreateProductRequest_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_AddProductsRequest_fieldAccessorTable = new
+    internal_static_CreateProductRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_AddProductsRequest_descriptor,
+        internal_static_CreateProductRequest_descriptor,
         new java.lang.String[] { "Product", "CartId", });
-    internal_static_AddProductResponse_descriptor =
+    internal_static_CreateProductResponse_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_AddProductResponse_fieldAccessorTable = new
+    internal_static_CreateProductResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_AddProductResponse_descriptor,
-        new java.lang.String[] { "Products", });
+        internal_static_CreateProductResponse_descriptor,
+        new java.lang.String[] { "Product", });
+    internal_static_ReadProductRequest_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_ReadProductRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ReadProductRequest_descriptor,
+        new java.lang.String[] { "ProductId", });
+    internal_static_ReadProductResponse_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_ReadProductResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ReadProductResponse_descriptor,
+        new java.lang.String[] { "Product", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

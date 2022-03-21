@@ -8,28 +8,31 @@ import com.proto.cart.Product;
 import com.proto.cart.ReadProductRequest;
 import com.proto.cart.ReadProductResponse;
 import com.proto.cart.ShoppingCartServiceGrpc;
+import com.proto.cart.UpdateProductRequest;
+import com.proto.cart.UpdateProductResponse;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
 public class ShoppingCartClient {
+
+    static ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051)
+            .usePlaintext() // this will force ssl to be activated during development
+            .build();
+
+    // creating stub
+    static ShoppingCartServiceGrpc.ShoppingCartServiceBlockingStub stubClient = ShoppingCartServiceGrpc.newBlockingStub(channel);
+
     public static void main(String[] args) {
         System.out.println("Client Running");
-
         ShoppingCartClient main = new ShoppingCartClient();
-        main.createProduct();
+        main.crud();
+
+        System.out.println("Shutting down channel");
+        channel.shutdown();
     }
 
-    private void createProduct() {
-        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051)
-                .usePlaintext() // this will force ssl to be activated during development
-                .build();
-
-        // creating stub
-        System.out.println("Creating stub");
-        ShoppingCartServiceGrpc.ShoppingCartServiceBlockingStub stubClient = ShoppingCartServiceGrpc.newBlockingStub(channel);
-
-        // Create product
+    private void crud() {
         Product product = Product.newBuilder()
                 .setProductId(UUID.randomUUID().toString())
                 .setName("Product")
@@ -46,15 +49,32 @@ public class ShoppingCartClient {
         System.out.println(createResponse.toString());
 
         // Read product
-        System.out.println("Reading product");
         ReadProductRequest readRequest = ReadProductRequest.newBuilder()
                 .setProductId(createResponse.getProduct().getProductId())
                 .build();
 
         ReadProductResponse readResponse = stubClient.readProduct(readRequest);
+
+        System.out.println("Read product");
         System.out.println(readResponse.toString());
 
-        System.out.println("Shutting down channel");
-        channel.shutdown();
+        // Update product
+        Product updatedProduct = Product.newBuilder()
+                .setProductId(createResponse.getProduct().getProductId())
+                .setName("Updated Product")
+                .setStock(20)
+                .setPrice(200.0)
+                .build();
+
+        UpdateProductRequest updateRequest = UpdateProductRequest.newBuilder()
+                .setProduct(updatedProduct)
+                .build();
+
+        UpdateProductResponse updateResponse = stubClient.updateProduct(updateRequest);
+
+        System.out.println("Updated product");
+        System.out.println(updateResponse.toString());
+
     }
+
 }

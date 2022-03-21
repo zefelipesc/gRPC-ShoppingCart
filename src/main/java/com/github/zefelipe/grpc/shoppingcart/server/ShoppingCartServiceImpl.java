@@ -15,6 +15,8 @@ import com.proto.cart.Product;
 import com.proto.cart.ReadProductRequest;
 import com.proto.cart.ReadProductResponse;
 import com.proto.cart.ShoppingCartServiceGrpc;
+import com.proto.cart.UpdateProductRequest;
+import com.proto.cart.UpdateProductResponse;
 
 import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
@@ -93,5 +95,46 @@ public class ShoppingCartServiceImpl extends ShoppingCartServiceGrpc.ShoppingCar
            responseObserver.onCompleted();
            System.out.println("Product found!");
        }
+    }
+
+    @Override
+    public void updateProduct(UpdateProductRequest request, StreamObserver<UpdateProductResponse> responseObserver) {
+        System.out.println("Receive Update Product Request");
+        String productId = request.getProduct().getProductId();
+
+        // I need to do a wrapper into a new ObjectId, because in mongoDB de _id field is already wrapped into a objectId(it is not a string)
+        // I find in the collection all the matching elements that have the id equals to the productId from request
+        System.out.println("Searching product to update...");
+        Document result = collection.find(eq("_id", new ObjectId(productId))).first();
+        if (result == null) {
+            responseObserver.onError(Status.NOT_FOUND.withDescription("The product with the searched id wasn't found").asRuntimeException());
+            System.out.println("Product not found!");
+        } else {
+            Document update = new Document("productId", request.getProduct().getProductId())
+                    .append("name", request.getProduct().getName())
+                    .append("stock", request.getProduct().getStock())
+                    .append("price", request.getProduct().getPrice())
+                    .append("_id", new ObjectId(productId));
+
+            // I'm replacing in the collection for the corresponding id with the update product
+            System.out.println("Updating product...");
+            collection.replaceOne(eq("_id", result.getObjectId("_id")), update);
+
+            Product updatedProduct = Product.newBuilder()
+                    .setProductId(update.getString("productId"))
+                    .setName(update.getString("name"))
+                    .setStock(update.getInteger("stock"))
+                    .setPrice(update.getDouble("price"))
+                    .build();
+
+            UpdateProductResponse response = UpdateProductResponse.newBuilder()
+                    .setProduct(updatedProduct)
+                    .build();
+
+            System.out.println("Updated! Sending as response");
+            responseObserver.onNext(response);
+            responseObserver.onCompleted();
+            System.out.println("Product found!");
+        }
     }
 }

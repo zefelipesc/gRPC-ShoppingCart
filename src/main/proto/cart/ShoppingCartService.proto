@@ -6,6 +6,7 @@ option java_multiple_files = true;
 service ShoppingCartService {
   rpc CreateProduct(CreateProductRequest) returns (CreateProductResponse);
   rpc ReadProduct(ReadProductRequest) returns (ReadProductResponse);
+  rpc UpdateProduct(UpdateProductRequest) returns (UpdateProductResponse);
 }
 
 message Product {
@@ -29,5 +30,13 @@ message ReadProductRequest {
 }
 
 message ReadProductResponse {
+  Product product = 1;
+}
+
+message UpdateProductRequest {
+  Product product = 1;
+}
+
+message UpdateProductResponse {
   Product product = 1;
 }

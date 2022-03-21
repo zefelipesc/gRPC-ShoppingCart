@@ -1,10 +1,14 @@
 /home/jose/grpc-cart-service/target/generated-sources/protobuf/java/com/proto/cart/CreateProductRequest.java
 /home/jose/grpc-cart-service/target/generated-sources/protobuf/java/com/proto/cart/Product.java
 /home/jose/grpc-cart-service/target/generated-sources/protobuf/java/com/proto/cart/CreateProductRequestOrBuilder.java
+/home/jose/grpc-cart-service/target/generated-sources/protobuf/java/com/proto/cart/UpdateProductResponseOrBuilder.java
 /home/jose/grpc-cart-service/target/generated-sources/protobuf/java/com/proto/cart/CreateProductResponse.java
 /home/jose/grpc-cart-service/target/generated-sources/protobuf/grpc-java/com/proto/cart/ShoppingCartServiceGrpc.java
 /home/jose/grpc-cart-service/target/generated-sources/protobuf/java/com/proto/cart/CreateProductResponseOrBuilder.java
 /home/jose/grpc-cart-service/src/main/java/com/github/zefelipe/grpc/shoppingcart/server/ShoppingCartServer.java
+/home/jose/grpc-cart-service/target/generated-sources/protobuf/java/com/proto/cart/UpdateProductRequestOrBuilder.java
+/home/jose/grpc-cart-service/target/generated-sources/protobuf/java/com/proto/cart/UpdateProductRequest.java
+/home/jose/grpc-cart-service/target/generated-sources/protobuf/java/com/proto/cart/UpdateProductResponse.java
 /home/jose/grpc-cart-service/src/main/java/com/github/zefelipe/grpc/shoppingcart/client/ShoppingCartClient.java
 /home/jose/grpc-cart-service/src/main/java/com/github/zefelipe/grpc/shoppingcart/server/ShoppingCartServiceImpl.java
 /home/jose/grpc-cart-service/target/generated-sources/protobuf/java/com/proto/cart/ReadProductResponse.java

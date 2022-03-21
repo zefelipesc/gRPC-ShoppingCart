@@ -108,6 +108,37 @@ public final class ShoppingCartServiceGrpc {
     return getUpdateProductMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.proto.cart.DeleteProductRequest,
+      com.proto.cart.DeleteProductResponse> getDeleteProductMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "DeleteProduct",
+      requestType = com.proto.cart.DeleteProductRequest.class,
+      responseType = com.proto.cart.DeleteProductResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.proto.cart.DeleteProductRequest,
+      com.proto.cart.DeleteProductResponse> getDeleteProductMethod() {
+    io.grpc.MethodDescriptor<com.proto.cart.DeleteProductRequest, com.proto.cart.DeleteProductResponse> getDeleteProductMethod;
+    if ((getDeleteProductMethod = ShoppingCartServiceGrpc.getDeleteProductMethod) == null) {
+      synchronized (ShoppingCartServiceGrpc.class) {
+        if ((getDeleteProductMethod = ShoppingCartServiceGrpc.getDeleteProductMethod) == null) {
+          ShoppingCartServiceGrpc.getDeleteProductMethod = getDeleteProductMethod =
+              io.grpc.MethodDescriptor.<com.proto.cart.DeleteProductRequest, com.proto.cart.DeleteProductResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "DeleteProduct"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.proto.cart.DeleteProductRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.proto.cart.DeleteProductResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new ShoppingCartServiceMethodDescriptorSupplier("DeleteProduct"))
+              .build();
+        }
+      }
+    }
+    return getDeleteProductMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -177,6 +208,13 @@ public final class ShoppingCartServiceGrpc {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpdateProductMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void deleteProduct(com.proto.cart.DeleteProductRequest request,
+        io.grpc.stub.StreamObserver<com.proto.cart.DeleteProductResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDeleteProductMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -200,6 +238,13 @@ public final class ShoppingCartServiceGrpc {
                 com.proto.cart.UpdateProductRequest,
                 com.proto.cart.UpdateProductResponse>(
                   this, METHODID_UPDATE_PRODUCT)))
+          .addMethod(
+            getDeleteProductMethod(),
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
+              new MethodHandlers<
+                com.proto.cart.DeleteProductRequest,
+                com.proto.cart.DeleteProductResponse>(
+                  this, METHODID_DELETE_PRODUCT)))
           .build();
     }
   }
@@ -241,6 +286,14 @@ public final class ShoppingCartServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getUpdateProductMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void deleteProduct(com.proto.cart.DeleteProductRequest request,
+        io.grpc.stub.StreamObserver<com.proto.cart.DeleteProductResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getDeleteProductMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -276,6 +329,13 @@ public final class ShoppingCartServiceGrpc {
     public com.proto.cart.UpdateProductResponse updateProduct(com.proto.cart.UpdateProductRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getUpdateProductMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.proto.cart.DeleteProductResponse deleteProduct(com.proto.cart.DeleteProductRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getDeleteProductMethod(), getCallOptions(), request);
     }
   }
 
@@ -316,11 +376,20 @@ public final class ShoppingCartServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getUpdateProductMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.proto.cart.DeleteProductResponse> deleteProduct(
+        com.proto.cart.DeleteProductRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getDeleteProductMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_CREATE_PRODUCT = 0;
   private static final int METHODID_READ_PRODUCT = 1;
   private static final int METHODID_UPDATE_PRODUCT = 2;
+  private static final int METHODID_DELETE_PRODUCT = 3;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -350,6 +419,10 @@ public final class ShoppingCartServiceGrpc {
         case METHODID_UPDATE_PRODUCT:
           serviceImpl.updateProduct((com.proto.cart.UpdateProductRequest) request,
               (io.grpc.stub.StreamObserver<com.proto.cart.UpdateProductResponse>) responseObserver);
+          break;
+        case METHODID_DELETE_PRODUCT:
+          serviceImpl.deleteProduct((com.proto.cart.DeleteProductRequest) request,
+              (io.grpc.stub.StreamObserver<com.proto.cart.DeleteProductResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -415,6 +488,7 @@ public final class ShoppingCartServiceGrpc {
               .addMethod(getCreateProductMethod())
               .addMethod(getReadProductMethod())
               .addMethod(getUpdateProductMethod())
+              .addMethod(getDeleteProductMethod())
               .build();
         }
       }

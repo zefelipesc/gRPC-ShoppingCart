@@ -9,8 +9,11 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.result.DeleteResult;
 import com.proto.cart.CreateProductRequest;
 import com.proto.cart.CreateProductResponse;
+import com.proto.cart.DeleteProductRequest;
+import com.proto.cart.DeleteProductResponse;
 import com.proto.cart.Product;
 import com.proto.cart.ReadProductRequest;
 import com.proto.cart.ReadProductResponse;
@@ -34,11 +37,10 @@ public class ShoppingCartServiceImpl extends ShoppingCartServiceGrpc.ShoppingCar
 
     @Override
     public void createProduct(CreateProductRequest request, StreamObserver<CreateProductResponse> responseObserver) {
-        System.out.println("Receive Create Product Request");
+        System.out.println("Receive Create Product Response");
 
         Product prod = request.getProduct();
-        Document doc = new Document("productId", prod.getProductId())
-                .append("name", prod.getName())
+        Document doc = new Document("name", prod.getName())
                 .append("stock", prod.getStock())
                 .append("price", prod.getPrice());
 
@@ -48,7 +50,7 @@ public class ShoppingCartServiceImpl extends ShoppingCartServiceGrpc.ShoppingCar
 
         // Retrieve the mongoDb generatedID
         String id = doc.getObjectId("_id").toString();
-        System.out.println("Inserted product with id: " + id);
+        System.out.println("Inserted product with objectID: " + id);
 
         Product product = Product.newBuilder()
                 .setProductId(id)
@@ -69,19 +71,20 @@ public class ShoppingCartServiceImpl extends ShoppingCartServiceGrpc.ShoppingCar
 
     @Override
     public void readProduct(ReadProductRequest request, StreamObserver<ReadProductResponse> responseObserver) {
-        System.out.println("Receive Read Product Request");
+        System.out.println("Receive Read Product Response");
         String productId = request.getProductId();
 
         // I need to do a wrapper into a new ObjectId, because in mongoDB de _id field is already wrapped into a objectId(it is not a string)
         // I find in the collection all the matching elements that have the id equals to the productId from request
        System.out.println("Searching product...");
        Document result = collection.find(eq("_id", new ObjectId(productId))).first();
+
        if (result == null) {
            responseObserver.onError(Status.NOT_FOUND.withDescription("The product with the searched id wasn't found").asRuntimeException());
            System.out.println("Product not found!");
        } else {
            Product product = Product.newBuilder()
-                   .setProductId(result.getString("productId"))
+                   .setProductId(productId)
                    .setName(result.getString("name"))
                    .setStock(result.getInteger("stock"))
                    .setPrice(result.getDouble("price"))
@@ -99,7 +102,7 @@ public class ShoppingCartServiceImpl extends ShoppingCartServiceGrpc.ShoppingCar
 
     @Override
     public void updateProduct(UpdateProductRequest request, StreamObserver<UpdateProductResponse> responseObserver) {
-        System.out.println("Receive Update Product Request");
+        System.out.println("Receive Update Product Response");
         String productId = request.getProduct().getProductId();
 
         // I need to do a wrapper into a new ObjectId, because in mongoDB de _id field is already wrapped into a objectId(it is not a string)
@@ -135,6 +138,27 @@ public class ShoppingCartServiceImpl extends ShoppingCartServiceGrpc.ShoppingCar
             responseObserver.onNext(response);
             responseObserver.onCompleted();
             System.out.println("Product found!");
+        }
+    }
+
+    @Override
+    public void deleteProduct(DeleteProductRequest request, StreamObserver<DeleteProductResponse> responseObserver) {
+        System.out.println("Receive Delete Product Response");
+        String productId = request.getProductId();
+
+        DeleteResult result = collection.deleteOne(eq("_id", new ObjectId(productId)));
+
+        if (result.getDeletedCount() == 0) {
+            responseObserver.onError(Status.NOT_FOUND.withDescription("The product with the searched id wasn't found").asRuntimeException());
+            System.out.println("Product not found!");
+        } else {
+            System.out.println("Product deleted!");
+            DeleteProductResponse deleteResponse = DeleteProductResponse.newBuilder()
+                    .setProductId(productId)
+                    .build();
+
+            responseObserver.onNext(deleteResponse);
+            responseObserver.onCompleted();
         }
     }
 }

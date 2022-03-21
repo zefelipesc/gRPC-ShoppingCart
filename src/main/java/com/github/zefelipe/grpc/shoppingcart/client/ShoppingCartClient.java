@@ -4,6 +4,8 @@ import java.util.UUID;
 
 import com.proto.cart.CreateProductRequest;
 import com.proto.cart.CreateProductResponse;
+import com.proto.cart.DeleteProductRequest;
+import com.proto.cart.DeleteProductResponse;
 import com.proto.cart.Product;
 import com.proto.cart.ReadProductRequest;
 import com.proto.cart.ReadProductResponse;
@@ -34,7 +36,6 @@ public class ShoppingCartClient {
 
     private void crud() {
         Product product = Product.newBuilder()
-                .setProductId(UUID.randomUUID().toString())
                 .setName("Product")
                 .setStock(10)
                 .setPrice(100.0)
@@ -49,18 +50,19 @@ public class ShoppingCartClient {
         System.out.println(createResponse.toString());
 
         // Read product
+        String productId = createResponse.getProduct().getProductId();
         ReadProductRequest readRequest = ReadProductRequest.newBuilder()
-                .setProductId(createResponse.getProduct().getProductId())
+                .setProductId(productId)
                 .build();
 
         ReadProductResponse readResponse = stubClient.readProduct(readRequest);
 
-        System.out.println("Read product");
+        System.out.println("Product read");
         System.out.println(readResponse.toString());
 
         // Update product
         Product updatedProduct = Product.newBuilder()
-                .setProductId(createResponse.getProduct().getProductId())
+                .setProductId(productId)
                 .setName("Updated Product")
                 .setStock(20)
                 .setPrice(200.0)
@@ -74,6 +76,21 @@ public class ShoppingCartClient {
 
         System.out.println("Updated product");
         System.out.println(updateResponse.toString());
+
+        // Delete product
+        DeleteProductRequest deleteRequest = DeleteProductRequest.newBuilder()
+                .setProductId(productId)
+                .build();
+
+        DeleteProductResponse deleteResponse = stubClient.deleteProduct(deleteRequest);
+        System.out.println("Deleted product");
+
+        // Reading product after deletion // should throw NOT_FOUND
+        ReadProductRequest readProductAfterDeletionRequest = ReadProductRequest.newBuilder()
+                .setProductId(productId)
+                .build();
+
+        ReadProductResponse readProductAfterDeletionResponse = stubClient.readProduct(readProductAfterDeletionRequest);
 
     }
 

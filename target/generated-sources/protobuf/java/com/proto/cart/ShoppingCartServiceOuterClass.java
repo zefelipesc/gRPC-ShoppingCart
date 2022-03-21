@@ -49,6 +49,16 @@ public final class ShoppingCartServiceOuterClass {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_UpdateProductResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_DeleteProductRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_DeleteProductRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_DeleteProductResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_DeleteProductResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -68,13 +78,17 @@ public final class ShoppingCartServiceOuterClass {
       "tResponse\022\031\n\007product\030\001 \001(\0132\010.Product\"1\n\024" +
       "UpdateProductRequest\022\031\n\007product\030\001 \001(\0132\010." +
       "Product\"2\n\025UpdateProductResponse\022\031\n\007prod" +
-      "uct\030\001 \001(\0132\010.Product2\317\001\n\023ShoppingCartServ" +
-      "ice\022>\n\rCreateProduct\022\025.CreateProductRequ" +
-      "est\032\026.CreateProductResponse\0228\n\013ReadProdu" +
-      "ct\022\023.ReadProductRequest\032\024.ReadProductRes" +
-      "ponse\022>\n\rUpdateProduct\022\025.UpdateProductRe" +
-      "quest\032\026.UpdateProductResponseB\022\n\016com.pro" +
-      "to.cartP\001b\006proto3"
+      "uct\030\001 \001(\0132\010.Product\")\n\024DeleteProductRequ" +
+      "est\022\021\n\tproductId\030\001 \001(\t\"*\n\025DeleteProductR" +
+      "esponse\022\021\n\tproductId\030\001 \001(\t2\217\002\n\023ShoppingC" +
+      "artService\022>\n\rCreateProduct\022\025.CreateProd" +
+      "uctRequest\032\026.CreateProductResponse\0228\n\013Re" +
+      "adProduct\022\023.ReadProductRequest\032\024.ReadPro" +
+      "ductResponse\022>\n\rUpdateProduct\022\025.UpdatePr" +
+      "oductRequest\032\026.UpdateProductResponse\022>\n\r" +
+      "DeleteProduct\022\025.DeleteProductRequest\032\026.D" +
+      "eleteProductResponseB\022\n\016com.proto.cartP\001" +
+      "b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -122,6 +136,18 @@ public final class ShoppingCartServiceOuterClass {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_UpdateProductResponse_descriptor,
         new java.lang.String[] { "Product", });
+    internal_static_DeleteProductRequest_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_DeleteProductRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_DeleteProductRequest_descriptor,
+        new java.lang.String[] { "ProductId", });
+    internal_static_DeleteProductResponse_descriptor =
+      getDescriptor().getMessageTypes().get(8);
+    internal_static_DeleteProductResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_DeleteProductResponse_descriptor,
+        new java.lang.String[] { "ProductId", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

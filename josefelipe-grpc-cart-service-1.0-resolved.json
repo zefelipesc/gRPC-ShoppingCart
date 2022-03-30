@@ -1,0 +1,636 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Shopping Cart Service REST API",
+    "description": "This describes a REST API related to a Shopping Cart Service",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://shoppingcart.api"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Cart",
+      "description": "Operations about cart"
+    },
+    {
+      "name": "Category",
+      "description": "Operations about categories"
+    },
+    {
+      "name": "Products",
+      "description": "Operations about products"
+    }
+  ],
+  "paths": {
+    "/shoppingCart/{customerId}": {
+      "get": {
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Get shopping cart",
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "path",
+            "description": "Costumer id",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "UUID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/cart"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Updates cart product quantity",
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "path",
+            "description": "Costumer id",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "UUID"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/product"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Product quantity updated with success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/product"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Productout of stock",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "ProductNotFound": {
+                    "$ref": "#/components/examples/ProductNotFound"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Add item to cart",
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "path",
+            "description": "Costumer id",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "UUID"
+            }
+          },
+          {
+            "name": "cart product",
+            "in": "query",
+            "description": "Cart product object",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "$ref": "#/components/schemas/product"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/product"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Product successfully added"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Delete cart product",
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "path",
+            "description": "Costumer id",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "UUID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product deleted with success"
+          }
+        }
+      }
+    },
+    "/categories": {
+      "get": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Get list of categories",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/categories"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Categories not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "CategoryNotFound": {
+                    "$ref": "#/components/examples/CategoryNotFound"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categories/{categoryId}": {
+      "get": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Get category detail/description by id",
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "description": "The unique identifier for the categorie",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "UUID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/category"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/category/{productCategoryId}": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Get list os products by category id",
+        "parameters": [
+          {
+            "name": "productCategoryId",
+            "in": "path",
+            "description": "The unique identifier for the product categorie",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "UUID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/products"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/": {
+      "description": "Obtain informations about products from mongoDB/PostgreSQL database",
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "List all products",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/products"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Add a new product",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/product"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Product successfully added"
+          }
+        }
+      }
+    },
+    "/product/{productId}": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Obtain information about especific product",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "The unique identifier for the product",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "UUID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product found wit success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/product"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Product not found whit the provided ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "ProductNotFound": {
+                    "$ref": "#/components/examples/ProductNotFound"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Updates an existing product",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "The unique identifier for the product",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "UUID"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/product"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Product updated with success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/product"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Product not found whit the provided ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "ProductNotFound": {
+                    "$ref": "#/components/examples/ProductNotFound"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Deletes an existing product",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "The unique identifier for the product",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "UUID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product deleted with success"
+          },
+          "404": {
+            "description": "Product not found whit the provided ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "categories": {
+        "type": "array",
+        "description": "Model containg a category list",
+        "items": {
+          "$ref": "#/components/schemas/categories_inner"
+        }
+      },
+      "category": {
+        "type": "object",
+        "properties": {
+          "categoryId": {
+            "type": "string",
+            "format": "UUID",
+            "example": "fa88202e-aaae-11ec-b909-0242ac120002"
+          },
+          "name": {
+            "type": "string",
+            "example": "Electronics"
+          },
+          "details": {
+            "type": "string",
+            "example": "This category contains a lot of electronics products"
+          }
+        },
+        "description": "Model containg a category"
+      },
+      "cart": {
+        "type": "array",
+        "description": "Model containing a cart",
+        "items": {
+          "$ref": "#/components/schemas/cart_inner"
+        }
+      },
+      "product": {
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "string",
+            "format": "UUID",
+            "example": "fa88202e-aaae-11ec-b909-0242ac120002"
+          },
+          "name": {
+            "type": "string",
+            "example": "Product"
+          },
+          "stock": {
+            "type": "integer",
+            "format": "int32",
+            "example": 10
+          },
+          "price": {
+            "type": "number",
+            "format": "double",
+            "example": 20.5
+          }
+        },
+        "description": "Model containing product info"
+      },
+      "products": {
+        "type": "array",
+        "description": "Model containing an array product info",
+        "items": {
+          "$ref": "#/components/schemas/products_inner"
+        }
+      },
+      "ErrorResponse": {
+        "required": [
+          "code",
+          "message",
+          "reason"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "HTTP Status code"
+          },
+          "message": {
+            "type": "string",
+            "description": "Error message"
+          },
+          "reason": {
+            "type": "string",
+            "description": "HTTP Status code name"
+          }
+        }
+      },
+      "categories_inner": {
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/category"
+          }
+        }
+      },
+      "cart_inner": {
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/products"
+          }
+        }
+      },
+      "products_inner": {
+        "properties": {
+          "productId": {
+            "type": "string",
+            "format": "UUID",
+            "example": "fa88202e-aaae-11ec-b909-0242ac120002"
+          },
+          "name": {
+            "type": "string",
+            "example": "Product"
+          },
+          "stock": {
+            "type": "integer",
+            "format": "int32",
+            "example": 10
+          },
+          "price": {
+            "type": "number",
+            "example": 20.5
+          }
+        }
+      }
+    },
+    "examples": {
+      "CategoryNotFound": {
+        "value": {
+          "error": {
+            "code": 404,
+            "message": "Category not found",
+            "reason": "NOT_FOUND"
+          }
+        }
+      },
+      "ProductNotFound": {
+        "value": {
+          "error": {
+            "code": 404,
+            "message": "A product with ID {productId} was not found",
+            "reason": "NOT_FOUND"
+          }
+        }
+      }
+    }
+  }
+}
